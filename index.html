@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de Subredes</title>
+    <link rel="shortcut icon" href="ico.png" type="image/x-icon">
+    <!-- Enlace al archivo CSS externo -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Contenedor principal de la aplicación -->
+    <div class="container">
+        <!-- Cabecera con título y descripción -->
+        <header>
+            <h1>Calculadora de Subredes</h1>
+            <p class="subtitle">Herramienta para dividir redes IP en subredes más pequeñas</p>
+        </header>
+        
+        <!-- Sección de entrada de datos -->
+        <section class="input-section">
+            <div class="form-group">
+                <label for="baseNetwork">Red Base (ej: 192.168.1.0/24)</label>
+                <!-- Campo para ingresar la red base en formato CIDR -->
+                <input type="text" id="baseNetwork" value="192.168.1.0/24">
+            </div>
+            
+            <div class="form-group">
+                <label for="subnetsNeeded">Número de Subredes Necesarias</label>
+                <!-- Campo para especificar cuántas subredes se necesitan -->
+                <input type="number" id="subnetsNeeded" min="1" max="256" value="4">
+            </div>
+            
+            <!-- Botón para ejecutar el cálculo -->
+            <button id="calculateBtn">Calcular Subredes</button>
+        </section>
+        
+        <!-- Sección de resultados (inicialmente oculta) -->
+        <section class="results-section" id="resultsSection">
+            <div class="results-header">
+                <h2>Resultados del Subneteado</h2>
+                <!-- Botón para exportar resultados a CSV -->
+                <button id="exportBtn">Exportar a CSV</button>
+            </div>
+            
+            <!-- Div donde se mostrará el resumen del cálculo -->
+            <div class="summary" id="summary">
+                <!-- El contenido se generará dinámicamente con JavaScript -->
+            </div>
+            
+            <!-- Contenedor de la tabla de resultados -->
+            <div class="table-container">
+                <table id="subnetsTable">
+                    <thead>
+                        <tr>
+                            <!-- Encabezados de la tabla -->
+                            <th>Subred</th>
+                            <th>Dirección de Red</th>
+                            <th>Primer Host</th>
+                            <th>Último Host</th>
+                            <th>Broadcast</th>
+                            <th>Máscara</th>
+                            <th>Hosts Disponibles</th>
+                        </tr>
+                    </thead>
+                    <tbody id="subnetsTableBody">
+                        <!-- Las filas de la tabla se generarán dinámicamente con JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+        </section>
+        
+        <!-- Sección de instrucciones para el usuario -->
+        <section class="instructions">
+            <h3>Instrucciones de Uso</h3>
+            <ol>
+                <li>Ingresa la red base en formato CIDR (ej: 192.168.1.0/24)</li>
+                <li>Especifica cuántas subredes necesitas crear</li>
+                <li>Haz clic en "Calcular Subredes" para ver los resultados</li>
+                <li>Puedes exportar los resultados a CSV si lo necesitas</li>
+            </ol>
+        </section>
+    </div>
+    
+    <!-- Pie de página -->
+    <footer>
+        <p>Herramienta de Subneteado - Redes de Computadoras</p>
+    </footer>
+
+    <!-- Inclusión del archivo JavaScript externo -->
+    <script src="script.js"></script>
+</body>
+</html>
