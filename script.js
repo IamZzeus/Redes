@@ -135,28 +135,26 @@ document.addEventListener('DOMContentLoaded', function() {
      * Valida que la red ingresada tenga un formato correcto
      */
     function isValidNetwork(network) {
-        // Patrón regex para validar formato CIDR
-        const pattern = /^(\d{1,3}\.){3}\d{1,3}\/\d{1,2}$/;
-        if (!pattern.test(network)) return false;
-        
-        // Separar IP y CIDR
-        const [ip, cidr] = network.split('/');
-        const cidrValue = parseInt(cidr);
-        
-        // Validar rango del CIDR (1-30)
-        if (cidrValue < 1 || cidrValue > 30) return false;
-        
-        // Convertir IP a octetos
-        const octets = ip.split('.').map(Number);
-        if (octets.length !== 4) return false;
-        
-        // Validar que cada octeto esté en el rango correcto (0-255)
-        for (let octet of octets) {
-            if (octet < 0 || octet > 255) return false;
-        }
-        
-        return true;
+    // Aceptar direcciones con o sin CIDR
+    const pattern = /^(\d{1,3}\.){3}\d{1,3}(\/\d{1,2})?$/;
+    if (!pattern.test(network)) return false;
+
+    // Separar IP y CIDR (si existe)
+    const [ip, cidr] = network.split('/');
+    const cidrValue = cidr ? parseInt(cidr) : 24; // Valor por defecto si no se especifica CIDR
+
+    // Validar rango del CIDR (1-30)
+    if (cidrValue < 1 || cidrValue > 30) return false;
+
+    // Validar formato de IP
+    const octets = ip.split('.').map(Number);
+    if (octets.length !== 4) return false;
+    for (let octet of octets) {
+        if (octet < 0 || octet > 255) return false;
     }
+
+    return true;
+}
     
     /**
      * FUNCIÓN: ipToInt
